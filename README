@@ -1,0 +1,86 @@
+Copyright Dragan Dragos Ovidiu 313CAb 2022-2023
+
+Am inceput programul prin a citi de la tastatura litere cat timp sunt diferite de "Q".
+La inceputul codului am creat niste functii pe care le voi folosi pe parcursul codului, precum:
+1) "alocare" care imi aloca: 
+-intr-un vector de matrice (tablou tridimensional), o matrice de dimensiunile cerute;
+-2 vectori care imi retin numarul de coloane respectiv de linii ai matricei;
+
+2) "interschmbare" care imi interschimba: 
+-2 matrice si dimensiunile acestora de pe niste pozitii citite;
+
+3) "matricea_unitate" care imi creeaza pe o pozitia "index", matricea unitate.
+
+4) "modulo" care face mod 10^4 + 7 la un element
+
+Pentru litera L am creat functia "citire" care imi apeleaza functia "alocare";
+Apoi imi citeste elementele pentru a le retine in memorie.
+
+Pentru litera D am creat functia "dimensiune";
+Aceasta imi afiseaza dimensiunile unei matrice din vectorul linie si vectorul coloana.
+
+Pentru litera P am creat o functie care imi afiseaza o matrice din memorie.
+
+Pentru litera C apelez functia "redimensionare";
+Aceasta citeste un numar de linii si dupa aceea stocheaza liniile citite intr-un vector;
+Analog si pentru coloane. 
+Daca indexul este unul valid, imi formeaza o matrice la finalul sirului de matrice de dimensiunile citite.
+Aceasta este formata din elementele rezultate din intersectia liniilor si a coloanelor. 
+Pasul urmator este sa apelez functia "interschimbare";
+Apoi dealoc matricea de care nu mai am nevoie(cea initiala de care m-am folosit sa formez matricea dorita).
+
+Pentru litera M m-am folosit de functia "produs_mat";
+Am alocat o matrice la final cu urmatoarele dimensiuni: numarul de linii de la prima matrice si numarul de coloane de la cea de a 2-a.
+Dupa aceea am facut produsul celor 2 matrice si am stocat rezultatul la sfarsit.
+
+Pentru litera O am folosit subprogramul "ordonare";
+In cadrul acesteia am facut suma elementelor ale fiecarei matrice mod 10^4 + 7 si am stocat-o intr-un vector. 
+Dupa aceea cu algortimul "bubble sort" am sortat matricele, dimensiunile si vectorul cu sume.
+
+Pentru litera T am folosit functia "transpusa" ;
+Am alocat o matrice la final cu dimensiunile potrivite in care am copiat elementele in ordine transpusa.
+Am apelat functia "interschimbare" pentru a pune pe pozitia "index", matricea transpusa;
+Apoi am dealocat matricea initiala (cea netranspusa). 
+
+Pentru litera R m-am folosit de functia "ridicare_putere";
+-daca puterea este 0, atunci era stocata pe pozitia "index" matricea unitate;
+
+Altfel, daca puterea este mai mare decat 0:
+
+-la inceput am alocat o matrice ajutatoare care imi va stoca rezultatul dorit;
+-cat timp puterea este diferita de 0 executa urmatorul bloc de instructiuni:
+Daca puterea este impara atunci se inmulteste matricea ajutatoare cu valoarea curenta a matricei de pe pozitia index;
+Apoi indiferent de paritatea puterii, matricea de pe pozitia index este ridicata la patrat si puterea injumatatita.
+(prin aceasta implementare ne folosim de descompunerea puterii in baza 2).
+La final matricea de pe pozitia index este interschimbata cu matricea ajutatoare;
+Apoi se sterge matricea de care nu mai este nevoie.
+In acest fel, pe pozitia "index" a fost stocata matricea initiala ridicata la puterea dorita in timp logaritmic.
+	
+Pentru litera F m-am folosit de subprogramul "dealocare_matrice";
+In acest program se sterge din memorie o matrice si dimensiunile acesteia.
+
+Pentru litera Q am folosit subprogramul "eliberare totala";
+Am dealocat: -tot vectorul de matrice si continutul acestuia;
+             -vectorii de dimensiune ale matricelor.
+
+(Bonus) Inmultirea matricelor folosind algoritmul lui Strassen, prin apelarea literei 'S'.
+Pentru a realiza algoritmul lui Strassen am format inainte cateva functii de care ma voi folosi pe parcurs, precum: 
+1) "alocare2" unde am alocat dinamic o singura matrice;
+2) "eliberare2" unde am dealocat o singura matrice;
+3) "alocare_stras" unde am alocat dinamic mai multe matrice simultan;
+4) "eliberare_stras" unde am dealocat simultan mai multe matrice;
+5) "suma_matrice" care face suma a doua matrice;
+6) "dif_matrice" care face diferenta a doua matrice;
+7) "cadranul1", "cadranul2", "cadranul3", "cadranul4" parcurg cadranele si stocheaza in matricea C rezultatul inmultirii.
+
+Functia "strassen" va fi apelata recursiv, avand 2 cazuri:
+- daca matricele sunt de dimensiunea 2 pe 2 atunci va fi returnata o matrice "c";
+Aceasta este obtinuta dupa algoritmul lui Strassen aplicat pe numere, nu pe matrice.
+- daca matricele sunt de ordinul 2^k (k >= 2, k numar natural), atunci:
+~voi aloca dinamic 8 matrice de dimensiune n/2 ce reprezinta cadranele celor 2 matrice pentru care se face produsul.
+~in continuare ma voi folosi de alte 10 matrice (aux1, aux2..., aux10) pentru a retine diferente si sume a anumitor matrice;
+Scopul acestora este de a folosi iar algoritmul lui Strassen si de a forma matrice produs. 
+(Aceste matrice din urma (aux) au fost create si pentru a le putea dealoca la finalul subprogramului.) 
+La finalul subprogramului dealoc toate matricele pe care le am folosit pe parcurs.
+ 
+ La finalul programului daca nu este citita nicio litera din cele mentionate mai sus se afiseaza mesajul "Unrecognized command".
